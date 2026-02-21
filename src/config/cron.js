@@ -1,5 +1,5 @@
 const cron = require('node-cron');
-const Notification = require('../models/notification');
+const Notification = require('../models/Notification');
 const { sendNotification } = require('../Services/NotificationService');
 
 module.exports = {
@@ -23,7 +23,7 @@ module.exports = {
     cron.schedule('*/5 * * * *', async () => {
       const now = new Date();
       const delay = 30 * 60 * 1000; // 30 minutes en ms
-      const trajets = await Trajet.find({
+      const trajets = await trajets.find({
         statut: 'actif',
         date_depart: { $gte: new Date(now.getTime() + delay), $lte: new Date(now.getTime() + delay + 5 * 60 * 1000) },
         retard: { $gt: 0 }
@@ -45,7 +45,7 @@ module.exports = {
         });
 
         // Notification pour les passagers
-        const reservations = await Reservation.find({ trajet: trajet._id, statut: 'confirmee' }).populate('passager');
+        const reservations = await reservations.find({ trajet: trajet._id, statut: 'confirmee' }).populate('passager');
         for (const reservation of reservations) {
           await Notification.create({
             user: reservation.passager._id,

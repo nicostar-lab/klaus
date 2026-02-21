@@ -135,7 +135,7 @@ userSchema.pre('save', async function(next) {
 userSchema.methods.comparePassword = async function(candidatePassword) {
   try {
     return await bcrypt.compare(candidatePassword, this.password);
-  } catch (error) {
+  } catch (_error) {
     throw new Error('Erreur lors de la comparaison des mots de passe');
   }
 };

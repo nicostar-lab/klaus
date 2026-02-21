@@ -140,8 +140,7 @@ exports.optionalAuth = async (req, res, next) => {
         }
       }
     }
-  } catch (error) {
-    
+  } catch (_error) {
     // Ne pas bloquer si le token est invalide, juste continuer sans utilisateur
 
     console.log('Token invalide ou expiré (optionalAuth)');
