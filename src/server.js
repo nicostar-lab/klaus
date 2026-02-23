@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 const cors = require('cors');
 const path = require('path');
 const connectDB = require('./config/database');
-const initializeSocket = require('./Services/socketHandler');
+const initializeSocket = require('../src/Services/socketHandler');
 const evaluationRoutes = require('./routes/evaluationRoutes');
 
 // Charger les variables d'environnement
@@ -15,7 +15,7 @@ dotenv.config();
 const requiredEnvVars = ['MONGODB_URI', 'JWT_SECRET'];
 const missing = requiredEnvVars.filter(v => !process.env[v]);
 if (missing.length > 0) {
-  console.error(`❌ Missing required environment variables: ${missing.join(', ')}`);
+  console.error(`Missing required environment variables: ${missing.join(', ')}`);
   console.error('Please check your .env file');
   process.exit(1);
 }
@@ -40,7 +40,7 @@ app.set('io', io);
 
 // CORS configuration
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin:'http://localhost:5173',
   credentials: true
 }));
 

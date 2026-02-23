@@ -53,7 +53,7 @@ exports.register = async (req, res) => {
       success: true,
       message: 'Inscription réussie',
       token,
-      user: user.getPublicProfile()
+      // user: user.getPublicProfile()
     });
 
   } catch (error) {

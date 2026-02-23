@@ -1,4 +1,4 @@
-import api from './api';
+import api from "./api";
 
 /**
  * Service de gestion des réservations
@@ -9,10 +9,14 @@ const reservationService = {
    */
   createReservation: async (reservationData) => {
     try {
-      const response = await api.post('/reservations', reservationData);
+      const response = await api.post("/reservations", reservationData);
       return response.data;
     } catch (error) {
-      throw error.response?.data || { message: 'Erreur lors de la création de la réservation' };
+      throw (
+        error.response?.data || {
+          message: "Erreur lors de la création de la réservation",
+        }
+      );
     }
   },
 
@@ -22,10 +26,14 @@ const reservationService = {
   getMyReservations: async (status = null) => {
     try {
       const params = status ? { statut: status } : {};
-      const response = await api.get('/reservations', { params });
+      const response = await api.get("/reservations", { params });
       return response.data;
     } catch (error) {
-      throw error.response?.data || { message: 'Erreur lors de la récupération de vos réservations' };
+      throw (
+        error.response?.data || {
+          message: "Erreur lors de la récupération de vos réservations",
+        }
+      );
     }
   },
 
@@ -37,7 +45,11 @@ const reservationService = {
       const response = await api.get(`/reservations/${id}`);
       return response.data;
     } catch (error) {
-      throw error.response?.data || { message: 'Erreur lors de la récupération de la réservation' };
+      throw (
+        error.response?.data || {
+          message: "Erreur lors de la récupération de la réservation",
+        }
+      );
     }
   },
 
@@ -49,7 +61,11 @@ const reservationService = {
       const response = await api.delete(`/reservations/${id}`);
       return response.data;
     } catch (error) {
-      throw error.response?.data || { message: 'Erreur lors de l\'annulation de la réservation' };
+      throw (
+        error.response?.data || {
+          message: "Erreur lors de l'annulation de la réservation",
+        }
+      );
     }
   },
 
@@ -61,7 +77,11 @@ const reservationService = {
       const response = await api.get(`/reservations/trajet/${trajetId}`);
       return response.data;
     } catch (error) {
-      throw error.response?.data || { message: 'Erreur lors de la récupération des réservations' };
+      throw (
+        error.response?.data || {
+          message: "Erreur lors de la récupération des réservations",
+        }
+      );
     }
   },
 
@@ -73,7 +93,9 @@ const reservationService = {
       const response = await api.put(`/reservations/${id}/confirm`);
       return response.data;
     } catch (error) {
-      throw error.response?.data || { message: 'Erreur lors de la confirmation' };
+      throw (
+        error.response?.data || { message: "Erreur lors de la confirmation" }
+      );
     }
   },
 
@@ -85,9 +107,9 @@ const reservationService = {
       const response = await api.put(`/reservations/${id}/complete`);
       return response.data;
     } catch (error) {
-      throw error.response?.data || { message: 'Erreur lors de la complétion' };
+      throw error.response?.data || { message: "Erreur lors de la complétion" };
     }
-  }
+  },
 };
 
 export default reservationService;

@@ -1,4 +1,4 @@
-import api from './api';
+import api from "./api";
 
 /**
  * Service d'authentification
@@ -10,17 +10,17 @@ const authService = {
    */
   register: async (userData) => {
     try {
-      const response = await api.post('/auth/register', userData);
-      
+      const response = await api.post("/auth/register", userData);
+
       // Sauvegarder le token et les infos utilisateur
       if (response.data.success && response.data.token) {
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.user));
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
       }
-      
+
       return response.data;
     } catch (error) {
-      throw error.response?.data || { message: 'Erreur lors de l\'inscription' };
+      throw error.response?.data || { message: "Erreur lors de l'inscription" };
     }
   },
 
@@ -29,17 +29,17 @@ const authService = {
    */
   login: async (credentials) => {
     try {
-      const response = await api.post('/auth/login', credentials);
-      
+      const response = await api.post("/auth/login", credentials);
+
       // Sauvegarder le token et les infos utilisateur
       if (response.data.success && response.data.token) {
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.user));
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
       }
-      
+
       return response.data;
     } catch (error) {
-      throw error.response?.data || { message: 'Erreur lors de la connexion' };
+      throw error.response?.data || { message: "Erreur lors de la connexion" };
     }
   },
 
@@ -47,9 +47,9 @@ const authService = {
    * Déconnexion
    */
   logout: () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    window.location.href = '/';
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    window.location.href = "/";
   },
 
   /**
@@ -57,16 +57,20 @@ const authService = {
    */
   getMe: async () => {
     try {
-      const response = await api.get('/auth/me');
-      
+      const response = await api.get("/auth/me");
+
       // Mettre à jour les infos utilisateur dans le localStorage
       if (response.data.success) {
-        localStorage.setItem('user', JSON.stringify(response.data.user));
+        localStorage.setItem("user", JSON.stringify(response.data.user));
       }
-      
+
       return response.data;
     } catch (error) {
-      throw error.response?.data || { message: 'Erreur lors de la récupération du profil' };
+      throw (
+        error.response?.data || {
+          message: "Erreur lors de la récupération du profil",
+        }
+      );
     }
   },
 
@@ -75,16 +79,20 @@ const authService = {
    */
   updatePassword: async (passwords) => {
     try {
-      const response = await api.put('/auth/update-password', passwords);
-      
+      const response = await api.put("/auth/update-password", passwords);
+
       // Mettre à jour le token si un nouveau est fourni
       if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
+        localStorage.setItem("token", response.data.token);
       }
-      
+
       return response.data;
     } catch (error) {
-      throw error.response?.data || { message: 'Erreur lors de la mise à jour du mot de passe' };
+      throw (
+        error.response?.data || {
+          message: "Erreur lors de la mise à jour du mot de passe",
+        }
+      );
     }
   },
 
@@ -93,16 +101,20 @@ const authService = {
    */
   updateProfile: async (profileData) => {
     try {
-      const response = await api.put('/auth/update-profile', profileData);
-      
+      const response = await api.put("/auth/update-profile", profileData);
+
       // Mettre à jour les infos utilisateur
       if (response.data.success) {
-        localStorage.setItem('user', JSON.stringify(response.data.user));
+        localStorage.setItem("user", JSON.stringify(response.data.user));
       }
-      
+
       return response.data;
     } catch (error) {
-      throw error.response?.data || { message: 'Erreur lors de la mise à jour du profil' };
+      throw (
+        error.response?.data || {
+          message: "Erreur lors de la mise à jour du profil",
+        }
+      );
     }
   },
 
@@ -110,7 +122,7 @@ const authService = {
    * Vérifier si l'utilisateur est connecté
    */
   isAuthenticated: () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     return !!token;
   },
 
@@ -118,7 +130,7 @@ const authService = {
    * Obtenir l'utilisateur depuis le localStorage
    */
   getCurrentUser: () => {
-    const userStr = localStorage.getItem('user');
+    const userStr = localStorage.getItem("user");
     return userStr ? JSON.parse(userStr) : null;
   },
 
@@ -126,8 +138,8 @@ const authService = {
    * Obtenir le token
    */
   getToken: () => {
-    return localStorage.getItem('token');
-  }
+    return localStorage.getItem("token");
+  },
 };
 
 export default authService;

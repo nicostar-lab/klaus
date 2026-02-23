@@ -55,7 +55,9 @@ const trajetSchema = new mongoose.Schema({
   
   places_disponibles: {
     type: Number,
-    required: true,
+    default: function() {
+      return this.places_totales;
+    },
     min: [0, 'Le nombre de places disponibles ne peut pas être négatif']
   },
   

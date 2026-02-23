@@ -22,7 +22,8 @@ const reservationSchema = new mongoose.Schema({
     type: Number,
     required: [true, 'Le nombre de places est obligatoire'],
     min: [1, 'Il faut réserver au moins 1 place'],
-    max: [4, 'Maximum 4 places par réservation']
+    max: [4, 'Maximum 4 places par réservation'],
+    default: 1
   },
   
   // Statut de la réservation
