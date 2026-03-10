@@ -32,7 +32,7 @@ exports.getTrajets = async (req, res) => {
     if (statut) query.statut = statut;
 
     const trajets = await Trajet.find(query)
-      .populate("conducteur", "nom prenom photo note_moyenne")
+      .populate("conducteur", "nom prenom photo telephone note_moyenne")
       .populate("vehicule")
       .sort({ date_depart: 1 })
       .skip((page - 1) * limit)

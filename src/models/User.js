@@ -160,6 +160,7 @@ userSchema.methods.getPublicProfile = function () {
     email: this.email,
     telephone: this.telephone,
     photo: this.photo,
+    biographie: this.biographie,
     note_moyenne: this.note_moyenne,
     nb_evaluations: this.nb_evaluations,
     date_inscription: this.date_inscription,
